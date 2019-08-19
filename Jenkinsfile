@@ -2,27 +2,7 @@ library 'LEAD'
 pipeline {
   agent none
   stages {
-    // Note: Add build stage here
-
-    // Note: Add deploy stage here
-
-    // Note: Add gating stage here
-
-    // Note: Add prod stage here
-
-  }
-  post {
-    success {
-      echo "Pipeline Success"
-      notifyPipelineEnd()
-    }
-    failure {
-      echo "Pipeline Fail"
-      notifyPipelineEnd([result: "fail"])
-    }
-  }
-}
-stage('Build') {
+ stage('Build') {
       agent {
         label "lead-toolchain-skaffold"
       }
@@ -113,3 +93,16 @@ stage("Deploy to Production") {
         }
       }
     }
+  }
+  post {
+    success {
+      echo "Pipeline Success"
+      notifyPipelineEnd()
+    }
+    failure {
+      echo "Pipeline Fail"
+      notifyPipelineEnd([result: "fail"])
+    }
+  }
+}
+
